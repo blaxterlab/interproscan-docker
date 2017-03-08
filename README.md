@@ -23,5 +23,5 @@ docker run -u $UID:$GROUPS --rm \
     -v `pwd`:/in \
     -v `pwd`/interproscan.properties:/interproscan-5.22-61.0/interproscan.properties \
     blaxterlab/interproscan:latest \
-    interproscan.sh -i /in/test_proteins.fasta -d /dir
+    interproscan.sh -i /in/test_proteins.fasta -d /dir -dp -f XML -goterms -pa
 ```
