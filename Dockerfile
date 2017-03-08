@@ -30,10 +30,11 @@ RUN wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-11.1.
 
 RUN tar -pxvzf panther-data-11.1.tar.gz && rm panther-data-11.1.tar.gz.md5
 
-RUN adduser --disabled-password --gecos '' dockeruser
+# RUN adduser --disabled-password --gecos '' dockeruser
 
 ENV PATH="/interproscan-5.22-61.0/:${PATH}"
 
 WORKDIR /interproscan-5.22-61.0
 
-CMD /bin/bash
+RUN mkdir /data
+RUN chmod a+w /interproscan-5.22-61.0
