@@ -36,5 +36,16 @@ ENV PATH="/interproscan-5.22-61.0/:${PATH}"
 
 WORKDIR /interproscan-5.22-61.0
 
+COPY signalp-4.1f.Linux.tar.gz /
+RUN  tar -xzf /signalp-4.1f.Linux.tar.gz -C /interproscan-5.22-61.0/bin/signalp/4.1 --strip-components 1
+
+COPY tmhmm-2.0c.Linux.tar.gz /
+RUN  tar -xzf /tmhmm-2.0c.Linux.tar.gz -C / && \
+     cp /tmhmm-2.0c/bin/decodeanhmm.Linux_x86_64  /interproscan-5.22-61.0/bin/tmhmm/2.0c/decodeanhmm && \
+     cp /tmhmm-2.0c/lib/TMHMM2.0.model  /interproscan-5.22-61.0/data/tmhmm/2.0c/TMHMM2.0c.model
+
+#COPY phobius101_linux.tar.gz /
+#RUN  tar -xzf /phobius101_linux.tar.gz -C /interproscan-5.22-61.0/bin/phobius/1.01 --strip-components 3
+
 RUN mkdir /data
 RUN chmod a+w /interproscan-5.22-61.0
