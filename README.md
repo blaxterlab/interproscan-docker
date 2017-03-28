@@ -15,7 +15,15 @@ docker run -u $UID:$GROUPS --rm \
 
 You can run a complete interproscan command with all options (see https://github.com/ebi-pf-team/interproscan/wiki/HowToRun) using the docker command above.
 You can also edit the default interproscan.properties file as shown in https://github.com/ebi-pf-team/interproscan/wiki/ConfigurationOptions 
-and https://github.com/ebi-pf-team/interproscan/wiki/ImprovingPerformance and mount this file inside the container using this command:
+and https://github.com/ebi-pf-team/interproscan/wiki/ImprovingPerformance 
+
+For example, to run on a single machine with 64 cores, you could do:
+```
+curl https://raw.githubusercontent.com/ebi-pf-team/interproscan/5.22-61.0/core/jms-implementation/support-mini-x86-32/interproscan.properties \
+| perl -plne 's/^(number.of.embedded.workers).*/$1=1/;s/^(maxnumber.of.embedded.workers).*/$1=63/' >interproscan.properties
+```
+
+This will update `number.of.embedded.workers=1`, and `maxnumber.of.embedded.workers=63` in the default `interproscan.properties` file for this version 5.21-60.0. Once you have this file in the current working directory, you can mount it inside the container using this command:
 
 ```
 docker run -u $UID:$GROUPS --rm \
